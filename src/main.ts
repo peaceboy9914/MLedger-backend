@@ -23,6 +23,16 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, { bufferLogs: true });
   app.useLogger(logger);
 
+  const corsOrigin = process.env.CORS_ORIGIN;
+  const allowOrigins = corsOrigin ? corsOrigin.split(',').map((origin) => origin.trim()) : true;
+
+  app.enableCors({
+    origin: allowOrigins,
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  });
+
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
