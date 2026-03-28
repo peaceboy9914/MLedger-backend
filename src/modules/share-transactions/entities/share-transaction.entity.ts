@@ -20,15 +20,24 @@ export class ShareTransaction {
     @Column({ type: "enum", enum: TransactionType })
     type: TransactionType;
 
+    @Column({ type: "uuid" })
+    companyId: string;
+
     @Index()
-    @ManyToOne(() => Company)
+    @ManyToOne(() => Company, { nullable: false })
     @JoinColumn({ name: "companyId" })
     company: Company;
+
+    @Column({ type: "uuid", nullable: true })
+    fromShareholderId?: string;
 
     @Index()
     @ManyToOne(() => Shareholder, { nullable: true })
     @JoinColumn({ name: "fromShareholderId" })
     fromShareholder?: Shareholder;
+
+    @Column({ type: "uuid", nullable: true })
+    toShareholderId?: string;
 
     @Index()
     @ManyToOne(() => Shareholder, { nullable: true })
