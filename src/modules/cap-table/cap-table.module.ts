@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { CompanyUsersModule } from '../company-users/company-users.module';
 import { CapTableService } from './cap-table.service';
 import { CapTableController } from './cap-table.controller';
 import { CapTableCacheService } from './cap-table-cache.service';
@@ -11,6 +12,7 @@ import { Shareholder } from '../shareholders/entities/shareholder.entity';
 @Module({
   imports: [
     TypeOrmModule.forFeature([ShareTransaction, Company, Shareholder]),
+    CompanyUsersModule,
   ],
   providers: [CapTableService, CapTableCacheService, CapTableCacheInterceptor],
   controllers: [CapTableController],
