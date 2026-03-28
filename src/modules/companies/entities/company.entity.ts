@@ -1,7 +1,7 @@
 import { Entity, Column, OneToMany } from 'typeorm';
 import { BaseEntity } from '../../../common/entities/base.entity';
-import { User } from 'src/modules/users/entities/user.entity';
-import { ShareClass } from 'src/modules/share-classes/entities/share-class.entity';
+import { User } from '../../users/entities/user.entity';
+import { ShareClass } from '../../share-classes/entities/share-class.entity';
 import { CompanyUser } from '../../company-users/entities/company-user.entity';
 
 export enum CompanyStatus {

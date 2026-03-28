@@ -1,5 +1,5 @@
-import { Company } from "src/modules/companies/entities/company.entity";
-import { Shareholder } from "src/modules/shareholders/entities/shareholder.entity";
+import { Company } from '../../companies/entities/company.entity';
+import { Shareholder } from '../../shareholders/entities/shareholder.entity';
 import { Column, CreateDateColumn, Entity, Index, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 export enum TransactionType {
