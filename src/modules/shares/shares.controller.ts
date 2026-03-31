@@ -10,13 +10,14 @@ import type { TenantContext } from '../../common/interfaces/tenant-context.inter
 import { CompanyRolesGuard } from '../../common/guards/company-roles.guard';
 import { Roles } from '../../common/decorators/roles.decorator';
 import { CompanyUserRole } from '../company-users/entities/company-user.entity';
+import { CompanyActiveGuard } from '../companies/guards/company-active.guard';
 
 @Controller('companies/:companyId/shares')
 export class SharesController {
 
     constructor(private service: SharesService) {}
 
-    @UseGuards(JwtAuthGuard, CompanyMembershipGuard, CompanyRolesGuard)
+    @UseGuards(JwtAuthGuard, CompanyMembershipGuard, CompanyRolesGuard, CompanyActiveGuard)
     @Roles(CompanyUserRole.OWNER, CompanyUserRole.ADMIN, CompanyUserRole.LEGAL)
     @Post("issue")
     issue(
@@ -27,7 +28,7 @@ export class SharesController {
         return this.service.issueShares(tenant.companyId, dto, tenant);
     }
 
-    @UseGuards(JwtAuthGuard, CompanyMembershipGuard, CompanyRolesGuard)
+    @UseGuards(JwtAuthGuard, CompanyMembershipGuard, CompanyRolesGuard, CompanyActiveGuard)
     @Roles(CompanyUserRole.OWNER, CompanyUserRole.ADMIN, CompanyUserRole.LEGAL)
     @Post("transfer")
     transfer(

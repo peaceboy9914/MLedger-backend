@@ -18,6 +18,7 @@ import { ShareCertificatesModule } from './modules/share-certificates/share-cert
 import { CapTableModule } from './modules/cap-table/cap-table.module';
 import { CompanyUsersModule } from './modules/company-users/company-users.module';
 import { HealthModule } from './health/health.module';
+import { PlatformModule } from './platform/platform.module';
 
 @Module({
   imports: [
@@ -72,6 +73,8 @@ import { HealthModule } from './health/health.module';
     CapTableModule,
 
     CompanyUsersModule,
+
+    PlatformModule,
   ],
 })
 export class AppModule {}

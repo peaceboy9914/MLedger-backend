@@ -6,11 +6,13 @@ import { CompanyUser } from './entities/company-user.entity';
 import { Company } from '../companies/entities/company.entity';
 import { User } from '../users/entities/user.entity';
 import { AuditLogsModule } from '../audit-logs/audit-logs.module';
+import { CompaniesModule } from '../companies/companies.module';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([CompanyUser, Company, User]),
     forwardRef(() => AuditLogsModule),
+    forwardRef(() => CompaniesModule),
   ],
   providers: [CompanyUsersService],
   controllers: [CompanyUsersController],

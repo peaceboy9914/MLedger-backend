@@ -21,7 +21,9 @@
     "typeorm": "typeorm-ts-node-commonjs",
     "migration:run": "npm run typeorm -- migration:run -d src/data-source.ts",
     "migration:show": "npm run typeorm -- migration:show -d src/data-source.ts",
-    "migration:revert": "npm run typeorm -- migration:revert -d src/data-source.ts"
+    "migration:revert": "npm run typeorm -- migration:revert -d src/data-source.ts",
+    "seed": "ts-node --project tsconfig.seed.json -r dotenv/config src/database/seeds/seed.ts",
+    "db:setup": "npm run migration:run && npm run seed"
   },
   "dependencies": {
     "@nestjs/cache-manager": "^3.1.0",

@@ -7,6 +7,8 @@ import { CompanyUser } from '../../company-users/entities/company-user.entity';
 export enum CompanyStatus {
   ACTIVE = 'ACTIVE',
   SUSPENDED = 'SUSPENDED',
+  PENDING_REVIEW = 'PENDING_REVIEW',
+  ARCHIVED = 'ARCHIVED',
 }
 
 @Entity('companies')
@@ -38,6 +40,15 @@ export class Company extends BaseEntity {
     default: CompanyStatus.ACTIVE,
   })
   status: CompanyStatus;
+
+  @Column({ type: 'timestamp', nullable: true })
+  suspendedAt: Date | null;
+
+  @Column({ type: 'uuid', nullable: true })
+  suspendedByUserId: string | null;
+
+  @Column({ type: 'text', nullable: true })
+  suspensionReason: string | null;
 
   @OneToMany(() => User, (user) => user.company)
   users: User[];

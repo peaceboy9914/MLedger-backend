@@ -3,16 +3,12 @@ import {
   Get,
   Param,
   ParseUUIDPipe,
-  Post,
-  Body,
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { CacheTTL } from '@nestjs/cache-manager';
 import { CompaniesService } from './companies.service';
-import { CreateCompanyWithAdminDto } from './dto/create-company-with-admin.dto';
 import { CompanyListItemDto } from './dto/company-list-item.dto';
-import { CompanyOnboardResponseDto } from './dto/company-onboard-response.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { CompanyMembershipGuard } from '../../common/guards/company-membership.guard';
 import { CompanyRolesGuard } from '../../common/guards/company-roles.guard';
@@ -30,14 +26,6 @@ export class CompaniesController {
     private readonly companiesService: CompaniesService,
     private readonly capTableService: CapTableService,
   ) {}
-
-  // 🔥 Super Admin / platform onboarding endpoint (unchanged in this pass)
-  @Post('onboard')
-  async onboardCompany(
-    @Body() dto: CreateCompanyWithAdminDto,
-  ): Promise<CompanyOnboardResponseDto> {
-    return this.companiesService.createCompanyWithAdmin(dto);
-  }
 
   // 🔒 Tenant-scoped: cap table (normalized route; same cache key as GET /cap-table/companies/:companyId)
   @UseGuards(JwtAuthGuard, CompanyMembershipGuard, CompanyRolesGuard)

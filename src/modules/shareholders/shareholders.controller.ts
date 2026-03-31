@@ -10,6 +10,7 @@ import type { TenantContext } from '../../common/interfaces/tenant-context.inter
 import { CompanyRolesGuard } from '../../common/guards/company-roles.guard';
 import { Roles } from '../../common/decorators/roles.decorator';
 import { CompanyUserRole } from '../company-users/entities/company-user.entity';
+import { CompanyActiveGuard } from '../companies/guards/company-active.guard';
 
 @Controller('companies/:companyId/shareholders')
 export class ShareholdersController {
@@ -17,7 +18,7 @@ export class ShareholdersController {
         private readonly service: ShareholdersService
     ) {}
 
-    @UseGuards(JwtAuthGuard, CompanyMembershipGuard, CompanyRolesGuard)
+    @UseGuards(JwtAuthGuard, CompanyMembershipGuard, CompanyRolesGuard, CompanyActiveGuard)
     @Roles(CompanyUserRole.OWNER, CompanyUserRole.ADMIN, CompanyUserRole.LEGAL)
     @Post()
     create(
@@ -61,7 +62,7 @@ export class ShareholdersController {
         return this.service.findOne(id, tenant.companyId);
     }
 
-    @UseGuards(JwtAuthGuard, CompanyMembershipGuard, CompanyRolesGuard)
+    @UseGuards(JwtAuthGuard, CompanyMembershipGuard, CompanyRolesGuard, CompanyActiveGuard)
     @Roles(CompanyUserRole.OWNER, CompanyUserRole.ADMIN, CompanyUserRole.LEGAL)
     @Patch(':id')
     update(

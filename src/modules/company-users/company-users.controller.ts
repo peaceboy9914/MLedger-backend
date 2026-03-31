@@ -9,12 +9,13 @@ import { CompanyRolesGuard } from '../../common/guards/company-roles.guard';
 import { Roles } from '../../common/decorators/roles.decorator';
 import { CurrentTenant } from '../../common/decorators/current-tenant.decorator';
 import type { TenantContext } from '../../common/interfaces/tenant-context.interface';
+import { CompanyActiveGuard } from '../companies/guards/company-active.guard';
 
 @Controller('companies/:companyId/members')
 export class CompanyUsersController {
   constructor(private readonly companyUsersService: CompanyUsersService) {}
 
-  @UseGuards(JwtAuthGuard, CompanyMembershipGuard, CompanyRolesGuard)
+  @UseGuards(JwtAuthGuard, CompanyMembershipGuard, CompanyRolesGuard, CompanyActiveGuard)
   @Roles(CompanyUserRole.OWNER)
   @Post()
   async create(

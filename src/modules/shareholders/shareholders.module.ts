@@ -5,12 +5,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Shareholder } from './entities/shareholder.entity';
 import { AuditLogsModule } from '../audit-logs/audit-logs.module';
 import { CompanyUsersModule } from '../company-users/company-users.module';
+import { CompaniesModule } from '../companies/companies.module';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([Shareholder]),
     AuditLogsModule,
     CompanyUsersModule,
+    CompaniesModule,
   ],
   providers: [ShareholdersService],
   controllers: [ShareholdersController]
