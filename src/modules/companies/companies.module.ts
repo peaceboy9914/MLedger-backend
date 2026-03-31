@@ -21,6 +21,8 @@ import { CompanyActiveGuard } from './guards/company-active.guard';
   ],
   providers: [CompaniesService, CompanyActiveGuard],
   controllers: [CompaniesController, MeCompaniesController],
-  exports: [CompanyActiveGuard],
+  // Re-export TypeOrmModule so CompanyActiveGuard’s @InjectRepository(Company) resolves in
+  // consumer modules (ShareholdersModule, SharesModule, CompanyUsersModule).
+  exports: [TypeOrmModule, CompanyActiveGuard],
 })
 export class CompaniesModule {}
